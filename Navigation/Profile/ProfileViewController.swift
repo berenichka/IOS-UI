@@ -29,7 +29,7 @@ class ProfileViewController: UIViewController {
         oneMoreButton.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         oneMoreButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         oneMoreButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
-        oneMoreButton.backgroundColor = .blue
+        oneMoreButton.backgroundColor = .systemBlue
         oneMoreButton.setTitleColor(.white, for: .normal)
         
         

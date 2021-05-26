@@ -30,11 +30,8 @@ class ProfileHeaderView: UIView {
         super.layoutSubviews()
         
         setupUI()
-        
-        setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-
-        statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
     }
+    
 
     @objc func buttonPressed() {
         statusLabel.text = editedStatusText
@@ -62,7 +59,7 @@ class ProfileHeaderView: UIView {
         fullNameLabel.font = UIFont.boldSystemFont(ofSize: 18)
 
 //        //button show status
-        setStatusButton.backgroundColor = .blue
+        setStatusButton.backgroundColor = .systemBlue
         setStatusButton.setTitle("Show status", for: .normal)
         setStatusButton.setTitleColor(.white, for: .normal)
         setStatusButton.layer.cornerRadius = 15
@@ -86,6 +83,10 @@ class ProfileHeaderView: UIView {
         statusTextField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         statusTextField.textColor = .black
 
+        
+        setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+
+        statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
     }
     
 }
