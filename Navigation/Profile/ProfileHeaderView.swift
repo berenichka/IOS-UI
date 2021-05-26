@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    
+    // MARK: variables and constants
     @IBOutlet weak var avatarImageView: UIView!
     
     @IBOutlet weak var fullNameLabel: UILabel!
@@ -22,17 +22,16 @@ class ProfileHeaderView: UIView {
     @IBOutlet weak var setStatusButton: UIButton!
     
     
-    
     private var editedStatusText = String()
     
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
+
+    // MARK: methods
+    override func awakeFromNib() {
+        super.awakeFromNib()
         setupUI()
     }
     
-
+    
     @objc func buttonPressed() {
         statusLabel.text = editedStatusText
         self.endEditing(true)
@@ -66,6 +65,7 @@ class ProfileHeaderView: UIView {
         setStatusButton.layer.shadowColor = UIColor.black.cgColor
         setStatusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
         setStatusButton.layer.shadowOpacity = 0.7
+        setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
 
 //        //text status
         statusLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -82,10 +82,6 @@ class ProfileHeaderView: UIView {
         statusTextField.layer.borderColor = UIColor.black.cgColor
         statusTextField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         statusTextField.textColor = .black
-
-        
-        setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-
         statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
     }
     
