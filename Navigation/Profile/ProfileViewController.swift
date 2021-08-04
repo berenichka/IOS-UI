@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class ProfileViewController: UIViewController {
 
     @IBOutlet weak var profileHeaderView: ProfileHeaderView!
@@ -21,7 +23,12 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
-        
+        #if DEBUG
+        print("Debug scheme")
+        #else
+        print("Release scheme")
+        self.profileHeaderView.backgroundColor = UIColor(named: "LightGreen")
+        #endif
         setupTableView()
 
     
@@ -49,6 +56,11 @@ class ProfileViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         
     }
 }
