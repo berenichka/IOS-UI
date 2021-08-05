@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
     
     private let indent = 16
+    
+    let imageFilter = ImageProcessor()
     
     var separatePost: PostModel? {
         didSet {
@@ -19,7 +22,11 @@ class PostTableViewCell: UITableViewCell {
             postDescriptionLabel.text = separatePost?.description
             postInteractionLikes.text = "Likes: " + String(separatePost?.likes ?? 0)
             postInteractionViews.text = "Views: " + String(separatePost?.views ?? 0)
-            
+            if let image = separatePost?.image  {
+                ImageProcessor().processImage(sourceImage: image, filter: separatePost?.filer ?? .tonal) { (image) in
+                    postPicture.image = image
+                }
+            }
         }
     }
     
@@ -98,6 +105,7 @@ class PostTableViewCell: UITableViewCell {
         postPicture.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
 //        postPicture.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
         postPicture.heightAnchor.constraint(equalTo: postPicture.widthAnchor).isActive = true
+        
         
 
         postDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false

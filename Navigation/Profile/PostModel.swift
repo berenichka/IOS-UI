@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 struct PostModel {
     
@@ -15,6 +16,7 @@ struct PostModel {
     var image: UIImage?
     var likes: Int
     var views: Int
+    var filer: ColorFilter
 }
 
 
