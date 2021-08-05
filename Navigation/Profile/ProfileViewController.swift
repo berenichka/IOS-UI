@@ -12,10 +12,12 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    @IBOutlet weak var profileHeaderView: ProfileHeaderView!
+//    @IBOutlet weak var profileHeaderView: ProfileHeaderView!
+    
+    
 
     
-    private let tableView = UITableView(frame: .zero, style: .plain)
+    private let tableView = UITableView(frame: .zero, style: .grouped)
  
     
     private let cellId = "cellId"
@@ -99,11 +101,11 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//
-//
-        let headerView = profileHeaderView
-        
+        let headerView = ProfileHeaderView()
         return headerView
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 220
+    }
 }
