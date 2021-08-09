@@ -16,7 +16,7 @@ var post4: PostModel = PostModel(name: "Me resting", description: "Please go awa
 
 
 
-let myPosts = [
+let myPosts: [PostModel] = [
         post1,
         post2,
         post3,

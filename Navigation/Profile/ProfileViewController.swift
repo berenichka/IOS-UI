@@ -12,11 +12,6 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-//    @IBOutlet weak var profileHeaderView: ProfileHeaderView!
-    
-    
-
-    
     private let tableView = UITableView(frame: .zero, style: .grouped)
  
     
@@ -80,7 +75,7 @@ extension ProfileViewController: UITableViewDataSource {
             
         let cell: PostTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! PostTableViewCell
         
-        cell.separatePost = myPosts[indexPath.row]
+        cell.createPost(separatePost: myPosts[indexPath.row])
             return cell
         }
     

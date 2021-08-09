@@ -15,22 +15,6 @@ class PostTableViewCell: UITableViewCell {
     
     let imageFilter = ImageProcessor()
     
-    var separatePost: PostModel? {
-        didSet {
-            postNameLabel.text = separatePost?.name
-            postPicture.image = separatePost?.image
-            postDescriptionLabel.text = separatePost?.description
-            postInteractionLikes.text = "Likes: " + String(separatePost?.likes ?? 0)
-            postInteractionViews.text = "Views: " + String(separatePost?.views ?? 0)
-            if let image = separatePost?.image  {
-                ImageProcessor().processImage(sourceImage: image, filter: separatePost?.filer ?? .tonal) { (image) in
-                    postPicture.image = image
-                }
-            }
-        }
-    }
-    
-    
     private let postNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -128,11 +112,18 @@ class PostTableViewCell: UITableViewCell {
         
     }
     
+    func createPost(separatePost: PostModel) {
+        postNameLabel.text = separatePost.name
+        postPicture.image = separatePost.image
+        postDescriptionLabel.text = separatePost.description
+        postInteractionLikes.text = "Likes: " + String(separatePost.likes )
+        postInteractionViews.text = "Views: " + String(separatePost.views )
+        if let image = separatePost.image  {
+            imageFilter.processImage(sourceImage: image, filter: separatePost.filer ) { (image) in
+                postPicture.image = image
+            }
+        }
+    }
+    
 }
 
-//
-//extension UIView {
-//    func addSubviews(_ subviews: UIView...) {
-//        subviews.forEach { addSubview($0) }
-//    }
-//}
