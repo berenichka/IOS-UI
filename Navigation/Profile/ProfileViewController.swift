@@ -8,12 +8,11 @@
 
 import UIKit
 
+
+
 class ProfileViewController: UIViewController {
 
-    @IBOutlet weak var profileHeaderView: ProfileHeaderView!
-
-    
-    private let tableView = UITableView(frame: .zero, style: .plain)
+    private let tableView = UITableView(frame: .zero, style: .grouped)
  
     
     private let cellId = "cellId"
@@ -21,7 +20,12 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
-        
+        #if DEBUG
+        print("Debug scheme")
+        #else
+        print("Release scheme")
+        self.profileHeaderView.backgroundColor = UIColor(named: "LightGreen")
+        #endif
         setupTableView()
 
     
@@ -51,6 +55,11 @@ class ProfileViewController: UIViewController {
         super.viewWillLayoutSubviews()
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource {
@@ -66,7 +75,7 @@ extension ProfileViewController: UITableViewDataSource {
             
         let cell: PostTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! PostTableViewCell
         
-        cell.separatePost = myPosts[indexPath.row]
+        cell.createPost(separatePost: myPosts[indexPath.row])
             return cell
         }
     
@@ -87,11 +96,11 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//
-//
-        let headerView = profileHeaderView
-        
+        let headerView = ProfileHeaderView()
         return headerView
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 220
+    }
 }

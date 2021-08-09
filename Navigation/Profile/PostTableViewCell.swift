@@ -7,22 +7,13 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
     
     private let indent = 16
     
-    var separatePost: PostModel? {
-        didSet {
-            postNameLabel.text = separatePost?.name
-            postPicture.image = separatePost?.image
-            postDescriptionLabel.text = separatePost?.description
-            postInteractionLikes.text = "Likes: " + String(separatePost?.likes ?? 0)
-            postInteractionViews.text = "Views: " + String(separatePost?.views ?? 0)
-            
-        }
-    }
-    
+    let imageFilter = ImageProcessor()
     
     private let postNameLabel: UILabel = {
         let label = UILabel()
@@ -99,6 +90,7 @@ class PostTableViewCell: UITableViewCell {
 //        postPicture.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
         postPicture.heightAnchor.constraint(equalTo: postPicture.widthAnchor).isActive = true
         
+        
 
         postDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         postDescriptionLabel.topAnchor.constraint(equalTo: postPicture.bottomAnchor, constant: CGFloat(indent)).isActive = true
@@ -120,11 +112,18 @@ class PostTableViewCell: UITableViewCell {
         
     }
     
+    func createPost(separatePost: PostModel) {
+        postNameLabel.text = separatePost.name
+        postPicture.image = separatePost.image
+        postDescriptionLabel.text = separatePost.description
+        postInteractionLikes.text = "Likes: " + String(separatePost.likes )
+        postInteractionViews.text = "Views: " + String(separatePost.views )
+        if let image = separatePost.image  {
+            imageFilter.processImage(sourceImage: image, filter: separatePost.filer ) { (image) in
+                postPicture.image = image
+            }
+        }
+    }
+    
 }
 
-//
-//extension UIView {
-//    func addSubviews(_ subviews: UIView...) {
-//        subviews.forEach { addSubview($0) }
-//    }
-//}
